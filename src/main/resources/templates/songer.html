@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <nav>
+        <div style="text-align: center;">
+            <button onclick="Promitquestion()">Click here to try JS code</button>
+        </div>
+        <ul>
+            <img src="assets/123.jpg">
+        </ul>
+    </nav>
+    <meta charset="UTF-8">
+    <title>Songr</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <script th:src="@{/js/myjs.js}"></script>
+</head>
+<body>
+<section>
+    <div style="text-align: center;"><h2>Albums List</h2></div>
+</section>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>ImageUrl</th>
+    </tr>
+
+    <tr>
+        <!--        <h2 th:text="  + ${albums.title} +"</h2>-->
+        <!--        <span th:text="${albums.artist}">Album Artist</span>-->
+        <!--        <img th:src="${albums.imageUrl}">-->
+
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+</table>
+
+<footer>
+
+    <div>
+        <h6> &copy; 2022 All rights reserved </h6>    <h6> Albums </h6>
+
+    </div>
+</footer>
+</body>
+</html>
+
