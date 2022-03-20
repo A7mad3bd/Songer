@@ -22,7 +22,11 @@ public class Album {
         this.length = length;
         this.imageUrl = imageUrl;
     }
-
+    public Album(String title, String artist,String imageUrl) {
+        this.title = title;
+        this.artist = artist;
+        this.imageUrl = imageUrl;
+    }
     public Album() {
 
     }
