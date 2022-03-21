@@ -3,10 +3,11 @@
 <head>
     <nav>
         <div style="text-align: center;">
-            <button onclick="Promitquestion()">Click here to try JS code</button>
+            <!--            <button onclick="Promitquestion()">Click here to try JS code</button>-->
         </div>
         <ul>
-            <img src="assets/123.jpg">
+            <a></a>
+            <!--            <img src="assets/123.jpg">-->
         </ul>
     </nav>
     <meta charset="UTF-8">
@@ -18,25 +19,35 @@
 <section>
     <div style="text-align: center;"><h2>Albums List</h2></div>
 </section>
+<form action="/addalbum" method="post">
+    <p>Title</p><input type="text" name="title"/></br>
+    <p>Artist</p><input type="text" name="artist"/></br>
+    <p>SongCount</p><input type="text" name="songCount"/></br>
+    <p>length</p><input type="text" name="length"/></br>
+    <p>Image Url</p><input type="text" name="imageUrl"/></br>
+    <button type="submit">Submit</button>
+</form>
+<ul th:each=" Albums: ${AlbumsList}">
+    <p>Title:</p><span th:text="${Albums.title}"></span>
+    <p>Artist:</p><span th:text="${Albums.artist}"></span>
+    <p>SongCount:</p><span th:text="${Albums.songCount}"></span>
+    <p>length:</p><span th:text="${Albums.length}"></span>
+    <p>Image Url:</p><span th:text="${Albums.imageUrl}"></span>
+    <p>ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ</p>
+</ul>
 <table>
     <tr>
-
         <th>Title</th>
         <th>Artist</th>
         <th>ImageUrl</th>
     </tr>
-
-    <tr>
-                <!--/*@thymesVar id="a" type=""*/-->
-<!--                <h2 th:text  = ${a} </h2>-->
-<!--                <span th:text="${albums.artist}">Album Artist</span>-->
-<!--                <img th:src="${albums.imageUrl}">-->
-
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
+    <ul th:each="Albums: ${AlbumsList}">
+        <tr>
+            <th><span th:text="${Albums.title}"></span></th>
+            <th><span th:text="${Albums.artist}"></span></th>
+            <th><img src="${Albums.imageUrl}" alt="" border=3 height=100 width=300></th>
+        </tr>
+    </ul>
 </table>
 
 <footer>
