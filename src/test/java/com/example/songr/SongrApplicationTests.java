@@ -1,6 +1,6 @@
 package com.example.songr;
 
-import com.example.songr.domain.Album;
+import com.example.songr.Models.Album;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
