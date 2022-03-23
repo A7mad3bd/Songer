@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <nav>
+        <div style="text-align: center;">
+            <!--            <button onclick="Promitquestion()">Click here to try JS code</button>-->
+        </div>
+        <ul>
+            <a></a>
+            <a></a>
+        </ul>
+    </nav>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <script th:src="@{/js/myjs.js}"></script>
+</head>
+<body>
+<div style="text-align: center;"><h1>Album List</h1></div>
+
+<form action="/addalbum" method="post">
+    <p>Title</p><input type="text" name="title"/></br>
+    <p>Artist</p><input type="text" name="artist"/></br>
+    <p>SongCount</p><input type="text" name="songCount"/></br>
+    <p>length</p><input type="text" name="length"/></br>
+    <p>Image Url</p><input type="text" name="imageUrl" /></br>
+
+    <button type="submit">Submit</button>
+</form>
+
+<div style="text-align: center;"><ul th:each="albums: ${albumsList}">
+    <p>Title</p><span th:text="${albums.title}"></span>
+    <p>Artist</p><span th:text="${albums.artist}"></span>
+    <p>SongCount</p><span th:text="${albums.songCount}"></span>
+    <p>length</p><span th:text="${albums.length}"></span>
+    <p>Image Url</p><span th:text="${albums.imageUrl}"></span>
+    <p>ــــــــــــــــــــــــــــــــــــــــــــــــــــــ</p>
+</ul></div>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>ImageUrl</th>
+    </tr>
+    <ul th:each="albums: ${albumsList}">
+        <tr>
+            <th><span th:text="${albums.title}"></span></th>
+            <th><span th:text="${albums.artist}"></span></th>
+            <th><img href="${albums.imageUrl}" alt="" border=3 height=100 width=300></th>
+
+        </tr>
+    </ul>
+</table>
+</body>
+<footer>
+
+    <div>
+        <h6> &copy; 2022 All rights reserved </h6>    <h6> Albums </h6>
+
+    </div>
+</footer>
+</html>
