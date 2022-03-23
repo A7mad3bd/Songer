@@ -13,15 +13,21 @@
     <meta charset="UTF-8">
     <link th:href="@{/css/styles.css}" rel="stylesheet"/>
     <script th:src="@{/js/myjs.js}"></script>
-    <title>Hello World</title>
+    <title>Albumlist</title>
 </head>
 <body>
-<div style="text-align: center;"><h1>Hello World</h1></div>
+
+<ul th:each="albumslist: ${albumslist}">
+    <tr>
+        <th><span th:text="${albumslist}"></span></th>
+
+    </tr>
+</ul>
+
 </body>
 <footer>
 
     <div>
-        <h6> &copy; 2022 All rights reserved </h6>    <h6> Albums </h6>
 
     </div>
 </footer>
