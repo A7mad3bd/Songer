@@ -1,9 +1,16 @@
 package com.example.songr.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.Set;
+
+
+@Setter
+@Getter
 @Entity
 public class Album {
     @Id
@@ -14,7 +21,11 @@ public class Album {
     private int songCount;
     private double length;
     private String imageUrl;
+    @OneToMany(mappedBy = "album")
+    Set<Song> items;
+
     public Album() {
+
     }
 
     public Album(String title, String artist, int songCount, double length, String imageUrl) {
@@ -83,4 +94,6 @@ public class Album {
                 ", imageUrl='" + imageUrl + '\'' +
                 '}';
     }
+
+
 }

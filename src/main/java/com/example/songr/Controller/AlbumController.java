@@ -1,4 +1,5 @@
 package com.example.songr.Controller;
+
 import com.example.songr.Models.Album;
 
 import com.example.songr.infrastructure.AlbumRepository;
@@ -12,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @org.springframework.stereotype.Controller
-public class Controller {
+public class AlbumController {
 
     @Autowired
     AlbumRepository albumRepository;
-//from albumRepository
+    //from albumRepository
     //provides more fine-grained control over where and how autowiring
     // should be accomplished provides more fine-grained control over where
     // and how autowiring should be accomplished
@@ -28,6 +29,7 @@ public class Controller {
         modelAndView.setViewName("albums");
         return modelAndView;
     }
+
     @RequestMapping("/hello")
     String HelloWorld() {
         return "index";
@@ -37,12 +39,13 @@ public class Controller {
     public String getcapitalize(@PathVariable String name) {
         return name.toUpperCase();
     }
+
     //    @ResponseBody
     @GetMapping("/albumslist")
     public ModelAndView getthreealbum(Model model) {
         List<String> albums = new ArrayList<>();
 
-       Album alb1 = new Album("One", "Maher Zain", 15, 47.16, "https://pbs.twimg.com/media/Cj9cwB1WUAAXGp5?format=jpg&name=medium");
+        Album alb1 = new Album("One", "Maher Zain", 15, 47.16, "https://pbs.twimg.com/media/Cj9cwB1WUAAXGp5?format=jpg&name=medium");
         Album alb2 = new Album("Ihlam Maaya", "Hamza Namira", 10, 35.45, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZr1Rfyq721YDFxEflgIp8jYgjgXftLlTjUT5qftdhm69lSs_zeITjNt9-dYFhmz7pAjc&usqp=CAU");
         Album alb3 = new Album("Ihlam Maaya", "Hamza Namira", 10, 35.45, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZr1Rfyq721YDFxEflgIp8jYgjgXftLlTjUT5qftdhm69lSs_zeITjNt9-dYFhmz7pAjc&usqp=CAU");
         albums.add(" Album Title : " + alb1.getTitle() + " and Artist is : " + alb1.getArtist() + " and Album Length is " + alb1.getLength());
@@ -56,7 +59,8 @@ public class Controller {
         return modelAndView;
 
     }
-    @RequestMapping(value = "/addalbum", method = {RequestMethod.GET,RequestMethod.POST})
+
+    @RequestMapping(value = "/addalbum", method = {RequestMethod.GET, RequestMethod.POST})
     public RedirectView createNewStudent(@ModelAttribute Album album) {
         albumRepository.save(album);
         return new RedirectView("allalbums");
