@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <nav>
+        <div style="text-align: center;">
+            <!--            <button onclick="Promitquestion()">Click here to try JS code</button>-->
+        </div>
+        <ul>
+            <a></a>
+            <a></a>
+        </ul>
+    </nav>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <script th:src="@{/js/myjs.js}"></script>
+    <title>Songs list</title>
 </head>
 <body>
-$END$
+<div style="text-align: center;"><h1>Songs list</h1></div>
+
+<form action="/createsong" method="post">
+<!--    <p>album_id</p><input type="text" name="album_id"/></br>-->
+    <p>length</p><input type="text" name="length"/></br>
+    <p>Title</p><input type="text" name="title"/></br>
+    <p>trackNumber</p><input type="text" name="track_number"/></br>
+
+    <button type="submit">Submit</button>
+</form>
+
+<table>
+
+    <tr>
+        <th>Title</th>
+        <th>Length</th>
+        <th>Track Number</th>
+        <!--        <th>id</th>-->
+    </tr>
+    <ul th:each="songlist: ${songlist}">
+        <tr>
+            <th><span th:text="${songlist.title}"></span></th>
+            <th><span th:text="${songlist.length}"></span></th>
+            <th><span th:text="${songlist.track_number}"></span></th>
+            <!--            <th><span th:text="${songlist.id}"></span></th>-->
+        </tr>
+    </ul>
+</table>
 </body>
+<footer>
+
+    <div>
+        <h6> &copy; 2022 All rights reserved </h6>    <h6> Songs </h6>
+
+    </div>
+</footer>
 </html>

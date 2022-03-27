@@ -1,11 +1,13 @@
 package com.example.songr.Models;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
 
+@JsonIgnoreProperties({"album"})
 @Setter
 @Getter
 @Entity
@@ -14,9 +16,21 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    @NonNull
     private String title;
+    @NonNull
     private Long length;
-    private Long trackNumber;
+    @NonNull
+    private Long track_number;
+
+    public Song() {
+    }
+
+    public Song(String title, long length, long track_number) {
+        this.title = title;
+        this.length = length;
+        this.track_number = track_number;
+    }
 
     public String getTitle() {
         return title;
@@ -34,13 +48,6 @@ public class Song {
         this.length = length;
     }
 
-    public Long getTrackNumber() {
-        return trackNumber;
-    }
-
-    public void setTrackNumber(Long trackNumber) {
-        this.trackNumber = trackNumber;
-    }
 
     public void setAlbum(Album album) {
         this.album = album;
@@ -56,7 +63,7 @@ public class Song {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", length=" + length +
-                ", trackNumber=" + trackNumber +
+                ", trackNumber=" + track_number +
                 ", album=" + album +
                 '}';
     }
@@ -69,6 +76,13 @@ public class Song {
         this.id = id;
     }
 
+    public Long getTrack_number() {
+        return track_number;
+    }
+
+    public void setTrack_number(Long track_number) {
+        this.track_number = track_number;
+    }
 
     @ManyToOne
     Album album;
