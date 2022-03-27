@@ -1,9 +1,9 @@
 package com.example.songr.Controller;
 
 import com.example.songr.Models.Album;
-
+import com.example.songr.Models.Song;
 import com.example.songr.infrastructure.AlbumRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.songr.infrastructure.SongRepository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,24 +13,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 @org.springframework.stereotype.Controller
-public class AlbumController {
+public class Controller {
 
-    @Autowired
-    AlbumRepository albumRepository;
+
     //from albumRepository
     //provides more fine-grained control over where and how autowiring
     // should be accomplished provides more fine-grained control over where
     // and how autowiring should be accomplished
 
+    private final SongRepository songRepository;
+    private final AlbumRepository albumRepository;
 
-    @RequestMapping("/")
-    public ModelAndView Hello() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("albums");
-        return modelAndView;
+
+    public Controller(SongRepository songRepository, AlbumRepository albumRepository) {
+        this.songRepository = songRepository;
+        this.albumRepository = albumRepository;
     }
 
-    @RequestMapping("/hello")
+    @RequestMapping("/")
     String HelloWorld() {
         return "index";
     }
@@ -61,14 +61,46 @@ public class AlbumController {
     }
 
     @RequestMapping(value = "/addalbum", method = {RequestMethod.GET, RequestMethod.POST})
-    public RedirectView createNewStudent(@ModelAttribute Album album) {
+    public RedirectView createNewAlbum(@ModelAttribute Album album) {
         albumRepository.save(album);
         return new RedirectView("allalbums");
     }
 
     @GetMapping("/allalbums")
-    public String getAllStudents(Model model) {
+    public String getAllAlbums(Model model) {
         model.addAttribute("albumsList", albumRepository.findAll());
         return "albums";
+    }
+
+    //A user should be able to see the songs that belong to an album when looking at that album.
+    //A user should be able to see information about all the songs on the site.
+    @GetMapping("/allsongs")
+    public String getAllSongs(Model model) {
+        model.addAttribute("songlist", songRepository.findAll());
+        return "Song";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/createsong", method = {RequestMethod.GET, RequestMethod.POST})
+    public RedirectView createNewSong(@ModelAttribute Song s1) {
+        songRepository.save(s1);
+        return new RedirectView("allsongs");
+    }
+
+    // A user should be able to view a page with data about one particular album.
+    @ResponseBody
+    @GetMapping("/album/{id}")
+    Album getAlbum(@PathVariable Long id, Model model) {
+        Album album = albumRepository.findById(id).orElseThrow(IllegalStateException::new);
+        return album;
+    }
+
+    //A user should be able to add songs to an album.
+    @RequestMapping(value = "/addsongto/{id}", method = {RequestMethod.GET, RequestMethod.POST})
+    public RedirectView createNewSong(@PathVariable Long id, @ModelAttribute Song song) {
+        Album foundAlbum = albumRepository.findById(id).get();
+        song.setAlbum(foundAlbum);
+        songRepository.save(song);
+        return new RedirectView("/allsongs");
     }
 }
