@@ -26,19 +26,21 @@
     <p>Artist</p><input type="text" name="artist"/></br>
     <p>SongCount</p><input type="text" name="songCount"/></br>
     <p>length</p><input type="text" name="length"/></br>
-    <p>Image Url</p><input type="text" name="imageUrl" /></br>
+    <p>Image Url</p><input type="text" name="imageUrl"/></br>
 
     <button type="submit">Submit</button>
 </form>
 
-<div style="text-align: center;"><ul th:each="albums: ${albumsList}">
-    <p>Title</p><span th:text="${albums.title}"></span>
-    <p>Artist</p><span th:text="${albums.artist}"></span>
-    <p>SongCount</p><span th:text="${albums.songCount}"></span>
-    <p>length</p><span th:text="${albums.length}"></span>
-    <p>Image Url</p><span th:text="${albums.imageUrl}"></span>
-    <p>ــــــــــــــــــــــــــــــــــــــــــــــــــــــ</p>
-</ul></div>
+<div style="text-align: center;">
+    <ul th:each="albums: ${albumsList}">
+        <p>Title</p><span th:text="${albums.title}"></span>
+        <p>Artist</p><span th:text="${albums.artist}"></span>
+        <p>SongCount</p><span th:text="${albums.songCount}"></span>
+        <p>length</p><span th:text="${albums.length}"></span>
+        <p>Image Url</p><span th:text="${albums.imageUrl}"></span>
+        <p>ــــــــــــــــــــــــــــــــــــــــــــــــــــــ</p>
+    </ul>
+</div>
 <table>
     <tr>
         <th>Title</th>
@@ -49,7 +51,7 @@
         <tr>
             <th><span th:text="${albums.title}"></span></th>
             <th><span th:text="${albums.artist}"></span></th>
-            <th><img href="${albums.imageUrl}" alt="" border=3 height=100 width=300></th>
+            <th><img src="${albums.imageUrl}" width="100" height="100" th:src="${albums.imageUrl}"/></th>
 
         </tr>
     </ul>
