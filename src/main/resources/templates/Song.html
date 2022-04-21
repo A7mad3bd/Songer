@@ -20,10 +20,14 @@
 
 <form action="/createsong" method="post">
 <!--    <p>album_id</p><input type="text" name="album_id"/></br>-->
-    <p>length</p><input type="text" name="length"/></br>
     <p>Title</p><input type="text" name="title"/></br>
+    <p>length</p><input type="number" name="length"/></br>
     <p>trackNumber</p><input type="text" name="track_number"/></br>
-
+    <select name="Albums" id="albumid"  >
+        <ul th:each="album: ${albums}">
+        <option name="id" th:value="${album.id}" th:text="${album.title}"> </option>
+        </ul>
+    </select>
     <button type="submit">Submit</button>
 </form>
 
@@ -40,6 +44,7 @@
             <th><span th:text="${songlist.title}"></span></th>
             <th><span th:text="${songlist.length}"></span></th>
             <th><span th:text="${songlist.track_number}"></span></th>
+
             <!--            <th><span th:text="${songlist.id}"></span></th>-->
         </tr>
     </ul>
