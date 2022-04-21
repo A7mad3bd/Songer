@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @JsonIgnoreProperties({"album"})
@@ -26,7 +25,14 @@ public class Song {
     public Song() {
     }
 
-    public Song(String title, long length, long track_number) {
+    public Song(@NonNull String title, @NonNull Long length, @NonNull Long track_number, Album album) {
+        this.title = title;
+        this.length = length;
+        this.track_number = track_number;
+        this.album = album;
+    }
+
+    public Song(String title, long length, long track_number ) {
         this.title = title;
         this.length = length;
         this.track_number = track_number;

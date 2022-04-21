@@ -81,11 +81,30 @@ public class Controller {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/createsong", method = {RequestMethod.GET, RequestMethod.POST})
-    public RedirectView createNewSong(@ModelAttribute Song s1) {
-        songRepository.save(s1);
+    @PostMapping("/createsong")
+    public RedirectView createNewSong(@ModelAttribute Song song,@RequestParam Long id,Model model) {
+        model.addAttribute("albums",albumRepository.findAll());
+
+        Album alb = albumRepository.getAlbumById(id);
+        if(alb!=null) {
+            Song s1=new Song(song.getTitle(),song.getLength(),song.getTrack_number(),alb);
+            songRepository.save(s1);
+        }
         return new RedirectView("allsongs");
     }
+    @GetMapping("/createsong")
+    public String ViewSong(Model model) {
+        model.addAttribute("albums",albumRepository.findAll());
+        return "Song";
+    }
+
+//    //    @PostMapping("/createsong")
+//    @RequestMapping(value = "/createsong", method = {RequestMethod.GET, RequestMethod.POST})
+//    public String createNewSong(@ModelAttribute String title, @ModelAttribute Long length, @ModelAttribute Long track_number, @ModelAttribute Album album) {
+//        Song s1 = new Song(title, length, track_number, album);
+//        songRepository.save(s1);
+//        return ("allsongs");
+//    }
 
     // A user should be able to view a page with data about one particular album.
     @ResponseBody
